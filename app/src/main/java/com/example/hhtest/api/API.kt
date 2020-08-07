@@ -1,7 +1,7 @@
 package com.example.hhtest.api
 
-import com.example.hhtest.entity.weather.WeatherResponse
-import io.reactivex.rxjava3.core.Single
+import com.example.hhtest.model.entity.weather.WeatherResponse
+import io.reactivex.Single
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

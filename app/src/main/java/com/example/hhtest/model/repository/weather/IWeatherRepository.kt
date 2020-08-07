@@ -1,7 +1,7 @@
-package com.example.hhtest.repository.weather
+package com.example.hhtest.model.repository.weather
 
-import com.example.hhtest.entity.weather.WeatherResponse
-import io.reactivex.rxjava3.core.Single
+import com.example.hhtest.model.entity.weather.WeatherResponse
+import io.reactivex.Single
 import retrofit2.Response
 
 interface IWeatherRepository {

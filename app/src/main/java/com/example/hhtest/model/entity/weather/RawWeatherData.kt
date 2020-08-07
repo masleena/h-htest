@@ -1,4 +1,4 @@
-package com.example.hhtest.entity.weather
+package com.example.hhtest.model.entity.weather
 
 import com.google.gson.annotations.SerializedName
 
