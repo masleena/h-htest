@@ -2,9 +2,8 @@ package com.example.hhtest.model.repository.weather
 
 import com.example.hhtest.api.API
 import com.example.hhtest.util.API_KEY
-import javax.inject.Inject
 
-class WeatherRepositoryImpl @Inject constructor(val api: API) :
+class WeatherRepositoryImpl constructor(val api: API) :
     IWeatherRepository {
 
     override fun getWeatherByCity(cityName: String, units: String, lang: String) =

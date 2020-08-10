@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">h&amp;htest</string>
+
+    <string name="auth_title">Авторизация</string>
+    <string name="auth_hint_email">Электронная почта</string>
+    <string name="auth_hint_password">Пароль</string>
+    <string name="err_user_not_found">Пользователь не обнаружен</string>
+    <string name="err_user_is_exist">Пользователь с такой почтой уже существует</string>
+    <string name="err_email_is_incorrect">Электронная почта некорректная</string>
+
+    <string name="password_must_contain">Пароль должен содержать:</string>
+    <string name="password_condition_len">минимум 6 символов</string>
+    <string name="password_condition_min_letter">минимум одна строчная буква</string>
+    <string name="password_condition_max_letter">минимум одна заглавная буква</string>
+    <string name="password_condition_digits">минимум одна цифра</string>
 </resources>

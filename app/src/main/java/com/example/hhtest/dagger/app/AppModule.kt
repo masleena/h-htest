@@ -1,6 +1,6 @@
 package com.example.hhtest.dagger.app
 
-import android.app.Application
+import com.example.hhtest.App
 import com.example.hhtest.api.API
 import com.example.hhtest.api.API.Companion.BASE_URL
 import com.example.hhtest.model.db.AppDataBase
@@ -15,17 +15,21 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Singleton
+
 @Module
 class AppModule {
 
     @Provides
     @Singleton
-    fun provideApp(application: Application) = application
+    fun provideRetrofitClient() = prepareRetrofitClient()
 
     @Provides
     @Singleton
-    fun provideRetrofitClient() = prepareRetrofitClient()
+    fun provideDataBase(app: App) = AppDataBase.getInstance(app.baseContext)
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(appDataBase: AppDataBase): IUserRepository = UserRepositoryImpl(appDataBase.userDao())
 
     private fun prepareRetrofitClient() : API {
         val client = prepareOkHttpClient()
@@ -37,14 +41,6 @@ class AppModule {
             .build()
             .create(API::class.java)
     }
-
-    @Provides
-    @Singleton
-    fun provideDataBase(app: Application) = AppDataBase.getInstance(app.baseContext)
-
-    @Provides
-    @Singleton
-    fun provideUserRepository(appDataBase: AppDataBase): IUserRepository = UserRepositoryImpl(appDataBase.userDao())
 
     private fun prepareOkHttpClient() = OkHttpClient.Builder()
         .callTimeout(5, TimeUnit.SECONDS)

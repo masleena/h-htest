@@ -4,7 +4,7 @@ import io.reactivex.Observable
 
 interface IUserRepository {
 
-    fun auth(login: String, password: String): Observable<Boolean>
+    fun signIn(email: String, password: String): Observable<Boolean>
 
-    fun reg(login: String, password: String): Observable<Boolean>
+    fun signUp(email: String, password: String): Observable<Boolean>
 }

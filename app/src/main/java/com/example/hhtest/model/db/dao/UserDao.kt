@@ -8,6 +8,6 @@ import io.reactivex.Single
 @Dao
 interface UserDao : BaseDao<User> {
 
-    @Query("SELECT * FROM `users` WHERE login=:login AND password=:password")
-    fun selectUser(login: String, password: String): Single<User?>
+    @Query("SELECT * FROM `users` WHERE email=:email AND password=:password")
+    fun selectUser(email: String, password: String): Single<User?>
 }

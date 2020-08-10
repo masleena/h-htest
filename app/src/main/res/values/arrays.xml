@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="conditions">
+        <item>@string/password_condition_len</item>
+        <item>@string/password_condition_min_letter</item>
+        <item>@string/password_condition_max_letter</item>
+        <item>@string/password_condition_digits</item>
+    </string-array>
+</resources>

@@ -1,13 +1,13 @@
 package com.example.hhtest.dagger.app
 
-import android.app.Application
+import com.example.hhtest.App
 import com.example.hhtest.dagger.weather.WeatherComponent
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
     fun plusWeatherComponent(): WeatherComponent
@@ -16,7 +16,7 @@ interface AppComponent {
     interface Builder {
 
         @BindsInstance
-        fun application(app: Application): Builder
+        fun application(app: App): Builder
 
         fun build(): AppComponent
     }
