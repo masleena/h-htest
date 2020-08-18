@@ -14,6 +14,10 @@ abstract class BasePresenter<T: IBaseView> {
         _view = view
     }
 
+    fun onViewDestroy() {
+        disposables.dispose()
+    }
+
     protected fun Disposable.addToDisposables() {
         disposables.add(this)
     }

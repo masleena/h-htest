@@ -4,6 +4,10 @@ import org.intellij.lang.annotations.Language
 
 const val API_KEY = "1d9115cd4c557acbdc9c465d876b80bd"
 
+const val BASE_IMAGE_URL = "http://openweathermap.org/img/wn/"
+
+const val BASE_IMAGE_URL_FINAL_PATH = "@2x.png"
+
 const val DATABASE_NAME = "mydb"
 
 @Language("RegExp")

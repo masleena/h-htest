@@ -6,6 +6,7 @@ import com.example.hhtest.model.repository.weather.IWeatherRepository
 import com.example.hhtest.ui.signing.ISignInView
 import com.example.hhtest.util.EMAIL_CONDITION
 import com.example.hhtest.util.PASSWORD_CONDITION
+import com.example.hhtest.util.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -18,8 +19,10 @@ class SigningPresenter constructor(
         userRep.signIn(email, password)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { _view.showProgressAndLockButton() }
+            .doOnTerminate { _view.hideProgressUnlockButton() }
             .subscribe({
-                showWeather()
+                _view.startGeoScanning()
             }, {
                 if (it is EmptyResultSetException)
                     _view.showErrorUserNotFound()
@@ -31,12 +34,23 @@ class SigningPresenter constructor(
             userRep.signUp(email, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { _view.showProgressAndLockButton() }
+                .doOnTerminate { _view.hideProgressUnlockButton() }
                 .subscribe { isUserSigned ->
                     if (isUserSigned)
-                        showWeather()
+                        _view.startGeoScanning()
                     else
                         _view.showErrorUserIsExist()
                 }.addToDisposables()
+    }
+
+    fun onLocationReceive(latLon: Pair<Double, Double>) {
+        weatherRep.getWeatherByCoordinates(latLon.first, latLon.second, Utils.getSystemLanguage())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                _view.showWeather(it)
+            }.addToDisposables()
     }
 
     private fun isSignInDataValid(email: String, password: String): Boolean {
@@ -49,10 +63,6 @@ class SigningPresenter constructor(
             return false
         }
         return true
-    }
-
-    private fun showWeather() {
-        _view.showWeather(null)
     }
 
     private fun checkEmail(email: String) = email.matches(Regex(EMAIL_CONDITION))

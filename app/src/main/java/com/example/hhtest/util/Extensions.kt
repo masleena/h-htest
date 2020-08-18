@@ -8,7 +8,7 @@ import android.widget.EditText
 
 fun Context.dpToPx(dp: Int) = dp * resources.displayMetrics.density
 
-fun Context.psToPx(ps: Int) = ps * resources.displayMetrics.scaledDensity
+fun Context.spToPx(ps: Int) = ps * resources.displayMetrics.scaledDensity
 
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
     addTextChangedListener(object : TextWatcher {

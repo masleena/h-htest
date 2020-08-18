@@ -1,6 +1,6 @@
 package com.example.hhtest.ui.signing
 
-import com.example.hhtest.model.entity.weather.Weather
+import com.example.hhtest.model.entity.weather.ReadyWeather
 import com.example.hhtest.ui.base.IBaseView
 
 interface ISignInView: IBaseView {
@@ -13,5 +13,11 @@ interface ISignInView: IBaseView {
 
     fun showErrorUserIsExist()
 
-    fun showWeather(weatherData: Weather?)
+    fun startGeoScanning()
+
+    fun showWeather(weatherData: ReadyWeather)
+
+    fun showProgressAndLockButton()
+
+    fun hideProgressUnlockButton()
 }

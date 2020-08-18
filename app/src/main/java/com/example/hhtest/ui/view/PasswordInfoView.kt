@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import com.example.hhtest.R
 import com.example.hhtest.util.dpToPx
-import com.example.hhtest.util.psToPx
+import com.example.hhtest.util.spToPx
 
 class PasswordInfoView(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
@@ -66,7 +66,7 @@ class PasswordInfoView(context: Context, attrs: AttributeSet) : LinearLayout(con
     }
 
     fun setItemsTextSize(sizeInPs: Int) {
-        textSize = context.psToPx(sizeInPs)
+        textSize = context.spToPx(sizeInPs)
         for (tv in children) {
             (tv as TextView).setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         }

@@ -13,4 +13,24 @@
     <string name="password_condition_min_letter">минимум одна строчная буква</string>
     <string name="password_condition_max_letter">минимум одна заглавная буква</string>
     <string name="password_condition_digits">минимум одна цифра</string>
+
+    <string name="wind_n">Северный</string>
+    <string name="wind_nw">Северо-западный</string>
+    <string name="wind_w">Западный</string>
+    <string name="wind_sw">Юго-западный</string>
+    <string name="wind_s">Южный</string>
+    <string name="wind_se">Юго-восточный</string>
+    <string name="wind_ne">Северо-восточный</string>
+    <string name="wind_e">Восточный</string>
+
+    <string name="attention">Внимание</string>
+    <string name="accept">Принять</string>
+    <string name="exit">Выход</string>
+    <string name="geo_msg">Для работы приложения необходимо разрешение на геолокацию</string>
+    <string name="err_geo_not_granted">Проблемы с получением вашего местоположения</string>
+    <string name="weather">"Погода: "</string>
+    <string name="humidity">"Влажность: "</string>
+    <string name="temp">"Температура: "</string>
+    <string name="wind">"Ветер: "</string>
+    <string name="meter_per_second">м/с</string>
 </resources>
