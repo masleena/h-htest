@@ -13,6 +13,8 @@ interface ISignInView: IBaseView {
 
     fun showErrorUserIsExist()
 
+    fun showErrorNotConnection()
+
     fun startGeoScanning()
 
     fun showWeather(weatherData: ReadyWeather)

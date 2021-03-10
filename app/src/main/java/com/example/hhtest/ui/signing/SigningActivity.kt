@@ -2,7 +2,9 @@ package com.example.hhtest.ui.signing
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.IntentFilter
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -16,6 +18,7 @@ import com.example.hhtest.dagger.DaggerComponents
 import com.example.hhtest.model.entity.weather.ReadyWeather
 import com.example.hhtest.presenter.SigningPresenter
 import com.example.hhtest.ui.base.BaseActivity
+import com.example.hhtest.util.NetworkStateReceiver
 import com.example.hhtest.util.Utils
 import com.example.hhtest.util.afterTextChanged
 import com.example.hhtest.util.moveToNextEditTextAfterClickEnter
@@ -34,6 +37,7 @@ class SigningActivity : BaseActivity(), ISignInView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signing)
+        registerReceiver(NetworkStateReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
         DaggerComponents.weatherComponent.inject(this)
         presenter.onCreateView(this)
         piv.addConditions(resources.getStringArray(R.array.conditions))
@@ -126,6 +130,10 @@ class SigningActivity : BaseActivity(), ISignInView {
 
     override fun showErrorUserIsExist() {
         showMessage(getString(R.string.err_user_is_exist))
+    }
+
+    override fun showErrorNotConnection() {
+        showMessage("Превышено время ожидания")
     }
 
     override fun showProgressAndLockButton() {
