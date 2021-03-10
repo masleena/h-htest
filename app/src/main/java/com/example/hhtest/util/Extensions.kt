@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.Toast
 
 fun Context.dpToPx(dp: Int) = dp * resources.displayMetrics.density
 
@@ -32,4 +33,8 @@ fun EditText.moveToNextEditTextAfterClickEnter(nextET: EditText) {
         }
         return@setOnEditorActionListener false
     }
+}
+
+fun Context.showToastMessage(msg: String) {
+    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 }

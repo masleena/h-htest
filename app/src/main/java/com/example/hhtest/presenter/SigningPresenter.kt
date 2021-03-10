@@ -9,6 +9,7 @@ import com.example.hhtest.util.PASSWORD_CONDITION
 import com.example.hhtest.util.Utils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.net.SocketTimeoutException
 
 class SigningPresenter constructor(
     val userRep: IUserRepository,
@@ -48,8 +49,11 @@ class SigningPresenter constructor(
         weatherRep.getWeatherByCoordinates(latLon.first, latLon.second, Utils.getSystemLanguage())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 _view.showWeather(it)
+            }) {
+                if (it is SocketTimeoutException)
+                    _view.showErrorNotConnection()
             }.addToDisposables()
     }
 
