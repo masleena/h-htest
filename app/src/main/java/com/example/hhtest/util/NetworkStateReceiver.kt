@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.NetworkInfo.DetailedState.*
+import com.example.hhtest.R
 
 class NetworkStateReceiver : BroadcastReceiver() {
 
@@ -20,9 +21,9 @@ class NetworkStateReceiver : BroadcastReceiver() {
 
     private fun checkNetworkState(context: Context, networkState: NetworkInfo) {
         when (networkState.detailedState) {
-            CONNECTED -> context.showToastMessage("Сеть восстановлена")
-            CONNECTING -> context.showToastMessage("Сеть восстанавливается")
-            else -> context.showToastMessage("Проблемы с подключением")
+            CONNECTED -> context.showToastMessage(context.getString(R.string.network_connected))
+            CONNECTING -> context.showToastMessage(context.getString(R.string.network_conntecting))
+            else -> context.showToastMessage(context.getString(R.string.network_error))
         }
     }
 

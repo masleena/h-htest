@@ -35,4 +35,7 @@
     <string name="meter_per_second">м/с</string>
     <string name="request_geo_from_settings">Разрешите доступ к геолокации из настроек приложения</string>
     <string name="error_not_network">Превышено время ожидания</string>
+    <string name="network_connected">Сеть восстановлена</string>
+    <string name="network_conntecting">Сеть восстанавливается</string>
+    <string name="network_error">Проблемы с подключением</string>
 </resources>
