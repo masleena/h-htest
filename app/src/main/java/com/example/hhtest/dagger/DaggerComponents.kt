@@ -15,4 +15,8 @@ object DaggerComponents {
     val weatherComponent by lazy {
         appComponent.plusWeatherComponent()
     }
+
+    val authComponent by lazy {
+        appComponent.plusAuthComponent()
+    }
 }

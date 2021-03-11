@@ -1,29 +1,22 @@
 package com.example.hhtest.presenter
 
 import androidx.room.EmptyResultSetException
-import com.example.hhtest.model.repository.user.IUserRepository
-import com.example.hhtest.model.repository.weather.IWeatherRepository
+import com.example.hhtest.domain.interactor.auth.AuthInteractor
 import com.example.hhtest.ui.signing.ISignInView
 import com.example.hhtest.util.EMAIL_CONDITION
 import com.example.hhtest.util.PASSWORD_CONDITION
-import com.example.hhtest.util.Utils
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.net.SocketTimeoutException
+import javax.inject.Inject
 
-class SigningPresenter constructor(
-    val userRep: IUserRepository,
-    val weatherRep: IWeatherRepository
+
+class SigningPresenter @Inject constructor(
+    val authInteractor: AuthInteractor
 ) : BasePresenter<ISignInView>() {
 
     fun onClickSignIn(email: String, password: String) {
-        userRep.signIn(email, password)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        authInteractor.signIn(email, password)
             .doOnSubscribe { _view.showProgressAndLockButton() }
-            .doOnTerminate { _view.hideProgressUnlockButton() }
             .subscribe({
-                _view.startGeoScanning()
+                _view.prepeareForShowingWeather()
             }, {
                 if (it is EmptyResultSetException)
                     _view.showErrorUserNotFound()
@@ -32,29 +25,14 @@ class SigningPresenter constructor(
 
     fun onClickSignUp(email: String, password: String) {
         if (isSignInDataValid(email, password))
-            userRep.signUp(email, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            authInteractor.signUp(email, password)
                 .doOnSubscribe { _view.showProgressAndLockButton() }
-                .doOnTerminate { _view.hideProgressUnlockButton() }
                 .subscribe { isUserSigned ->
                     if (isUserSigned)
-                        _view.startGeoScanning()
+                        _view.prepeareForShowingWeather()
                     else
                         _view.showErrorUserIsExist()
                 }.addToDisposables()
-    }
-
-    fun onLocationReceive(latLon: Pair<Double, Double>) {
-        weatherRep.getWeatherByCoordinates(latLon.first, latLon.second, Utils.getSystemLanguage())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _view.showWeather(it)
-            }) {
-                if (it is SocketTimeoutException)
-                    _view.showErrorNotConnection()
-            }.addToDisposables()
     }
 
     private fun isSignInDataValid(email: String, password: String): Boolean {

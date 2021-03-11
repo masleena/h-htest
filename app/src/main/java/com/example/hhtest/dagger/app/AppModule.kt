@@ -4,8 +4,7 @@ import com.example.hhtest.App
 import com.example.hhtest.api.API
 import com.example.hhtest.api.API.Companion.BASE_URL
 import com.example.hhtest.model.db.AppDataBase
-import com.example.hhtest.model.repository.user.IUserRepository
-import com.example.hhtest.model.repository.user.UserRepositoryImpl
+import com.example.hhtest.util.LocationListener
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,7 +28,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(appDataBase: AppDataBase): IUserRepository = UserRepositoryImpl(appDataBase.userDao())
+    fun provideLocationListener(app: App) = LocationListener(app)
 
     private fun prepareRetrofitClient() : API {
         val client = prepareOkHttpClient()
@@ -43,8 +42,8 @@ class AppModule {
     }
 
     private fun prepareOkHttpClient() = OkHttpClient.Builder()
-        .callTimeout(5, TimeUnit.SECONDS)
-        .readTimeout(5, TimeUnit.SECONDS)
-        .writeTimeout(5, TimeUnit.SECONDS)
+        .callTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
         .build()
 }

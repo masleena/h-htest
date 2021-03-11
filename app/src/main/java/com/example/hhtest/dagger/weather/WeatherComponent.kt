@@ -1,12 +1,11 @@
 package com.example.hhtest.dagger.weather
 
-import com.example.hhtest.ui.signing.SigningActivity
+import com.example.hhtest.ui.weather.WeatherFragment
 import dagger.Subcomponent
 
 @WeatherScope
 @Subcomponent(modules = [WeatherModule::class])
 interface WeatherComponent {
 
-    fun inject(signingActivity: SigningActivity)
-
+    fun inject(weatherFragment: WeatherFragment)
 }

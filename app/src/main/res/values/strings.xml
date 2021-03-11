@@ -33,4 +33,6 @@
     <string name="temp">"Температура: "</string>
     <string name="wind">"Ветер: "</string>
     <string name="meter_per_second">м/с</string>
+    <string name="request_geo_from_settings">Разрешите доступ к геолокации из настроек приложения</string>
+    <string name="error_not_network">Превышено время ожидания</string>
 </resources>
